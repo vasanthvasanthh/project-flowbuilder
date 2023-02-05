@@ -118,29 +118,14 @@ $(document).dblclick(function(event) {
 //screenshot  
 $("#save").click(function() {
   html2canvas(document.querySelector("#drop")).then(canvas => {
-    var link = document.createElement("a");
-    link.download = "flowchart.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    var li = document.createElement("a");
+    li.download = "flowchart.png";
+    li.href = canvas.toDataURL("image/png");
+    li.click();
   });
 });
 
-//delete selected element
-$(document).ready(function() {
-  $("#drop p").click(function() {
-    // when a tag is clicked, set it as the active tag
-    $("#drop p"	).removeClass("active");
-    $(this).addClass("active");
-  });
 
-  $(document).on("keydown", function(event) {
-    // check if the "Delete" key was pressed
-    if (event.key === "Delete") {
-      // remove the active tag
-      $("#drop p").remove();
-    }
-  });
-});
 
 
 </script>
