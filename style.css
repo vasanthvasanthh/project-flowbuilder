@@ -4,24 +4,16 @@
 	 top: 0;
 	 left: 0;
 	 float : right ;
-     border: 1px solid black;
+         border: 1px solid black;
     
 	 
-}
-
-
-img{
-	resize: both;
 }
 
 textarea::-webkit-resizer {
   display: none;
   border: 0px;
-  
- font-weight: bold;
-}
-textarea{
-	font-size: 15px;
- font-weight: bold;
+  font-weight: bold; 
+  font-size: 15px;
+       
 }
 
