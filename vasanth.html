@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flow chart maker</title>
+	<link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1802/1802977.png">
+<link
+href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<style>	
+#divstyle {
+width: 7%;
+height: 98vh;
+float: left;
+border: 1px solid black;
+background-color: #94c9d9;
+}
+</style>
+</head>
+
+
+<body style="overflow: hidden;">
+<div id="divstyle">
+	
+	<center><h4>Toolbar</h4>
+		<!--square -->
+<p style="font-weight: bold; width: 40px;
+ height: 40px; font-size: auto; overflow: hidden; border: 2px solid black; resize: none;" ></p>
+  <!--rectangle -->
+<p style="font-weight: bold; width: 40px;
+ height: 20px; font-size: auto; overflow: hidden; border: 2px solid black;" ></p>
+<!--circle -->
+<p style="font-weight: bold; width: 40px;
+ height: 40px; font-size: auto; overflow: hidden; border: 2px solid black; border-radius: 50%;" ></p>
+  <!--edge rectangle -->
+<p style="font-weight: bold; width: 40px;
+height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; border-radius: 10%;" ></p>
+<!--oval -->
+<p style="font-weight: bold; width: 40px;
+height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; border-radius: 100px/50px;" ></p>
+  <!--paralleogram -->
+<p style="font-weight: bold; width: 40px;
+height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; transform: skew(-20deg);" ></p>
+<br>
+<!--diamond -->
+<p style="width: 30px; 
+   height: 30px; 
+  margin-left: 30px;
+   border :2px solid black;
+   
+   -webkit-transform: rotate(-45deg);
+   -moz-transform: rotate(-45deg);
+   -ms-transform: rotate(-45deg);
+   -o-transform: rotate(-45deg);
+   transform: rotate(-45deg);
+   -webkit-transform-origin: 0 100%;
+   -moz-transform-origin: 0 100%;
+   -ms-transform-origin: 0 100%;
+   -o-transform-origin: 0 100%;
+   transform-origin: 0 100%;"></p>
+  
+  
+  </p>
+
+
+</center>
+
+</div> 
+
+<div id="drop" ></div>
+
+
+
+
+<button id="save" style=" position: absolute;bottom: 20px;right: 20px;" >save as image</button>
+<script>
+//elememt drag and clone ku
+$(function() {
+
+  $("#divstyle p").draggable({
+    helper: "clone" 
+});
+
+  $("#drop").droppable({
+    drop: function(event, ui) {
+    	 $(ui.helper).data("cloned", true);
+      $(this).append($(ui.helper).clone().resizable({aspectRatio: true}).draggable().removeClass().css({
+        top: ui.position.top,
+        left: ui.position.left,
+}));
+
+   $(this).on("clone", function(event) {
+  event.preventDefault();
+});
+}
+});
+});
+//double click panna text box 
+$(document).dblclick(function(event) {
+    var x = event.pageX;
+    var y = event.pageY;
+    $("<textarea draggable=true style=border:0px  ></textarea>").css({
+            position: "absolute",
+            left: x,
+            top: y
+
+
+        })
+        .appendTo("#drop");
+});
+
+//screenshot  
+$("#save").click(function() {
+  html2canvas(document.querySelector("#drop")).then(canvas => {
+    var li = document.createElement("a");
+    li.download = "flowchart.png";
+    li.href = canvas.toDataURL("image/png");
+    li.click();
+  });
+});
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
