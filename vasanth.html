@@ -89,7 +89,7 @@ $(function() {
 
   $("#drop").droppable({
     drop: function(event, ui) {
-    	 $(ui.helper).data("cloned", true);
+    	
       $(this).append($(ui.helper).clone().resizable({aspectRatio: true}).draggable().removeClass().css({
         top: ui.position.top,
         left: ui.position.left,
