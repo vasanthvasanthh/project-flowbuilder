@@ -90,14 +90,21 @@ $(function() {
   $("#drop").droppable({
     drop: function(event, ui) {
     	
-      $(this).append($(ui.helper).clone().resizable({aspectRatio: true}).draggable().removeClass().css({
+    if ($(ui.helper).hasClass('cloned')) {
+ $(this).append($(ui.helper).resizable({aspectRatio: true}).draggable().css({
         top: ui.position.top,
         left: ui.position.left,
-}));
+        }));
+}
+else
+{
+      $(this).append($(ui.helper).clone().resizable({aspectRatio: true}).addClass('cloned').draggable().css({
+        top: ui.position.top,
+        left: ui.position.left,
 
-   $(this).on("clone", function(event) {
-  event.preventDefault();
-});
+}));
+      
+    }
 }
 });
 });
@@ -109,7 +116,6 @@ $(document).dblclick(function(event) {
             position: "absolute",
             left: x,
             top: y
-
 
         })
         .appendTo("#drop");
