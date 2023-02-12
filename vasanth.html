@@ -26,6 +26,7 @@ background-color: #94c9d9;
 
 
 <body style="overflow: hidden;">
+  
 <div id="divstyle">
 	
 	<center><h4>Toolbar</h4>
@@ -46,8 +47,8 @@ height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; border
 height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; border-radius: 100px/50px;" ></p>
   <!--paralleogram -->
 <p style="font-weight: bold; width: 40px;
-height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; transform: skew(-20deg);" ></p>
-<br>
+height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; transform: skew(-20deg); margin-bottom: 40px;" ></p>
+
 <!--diamond -->
 <p style="width: 30px; 
    height: 30px; 
@@ -68,9 +69,14 @@ height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; transf
   
   </p>
 
-
+<p id="linev" style="border-left: 2px solid black; height: 40px; margin-left: 45px;margin-top: 40px;"></p>
+<br>
+<p id="lineh" style="border-top:  2px solid black; width: 40px;"></p>
+<br>
+<img src="delete.png" id="del" style="width:70px ;height:70px; ">
 </center>
 
+ 
 </div> 
 
 <div id="drop" ></div>
@@ -80,17 +86,29 @@ height: 20px; font-size: auto; overflow: hidden; border: 2px solid black; transf
 
 <button id="save" style=" position: absolute;bottom: 20px;right: 20px;" >save as image</button>
 <script>
+  $('#divstyle #del').droppable({
+
+  drop: function(event, ui) {
+    if ($(ui.helper).hasClass('cloned')) {
+    ui.draggable.remove();
+  }
+
+  }
+})
 //elememt drag and clone ku
 $(function() {
 
   $("#divstyle p").draggable({
+   
     helper: "clone" 
 });
+
 
   $("#drop").droppable({
     drop: function(event, ui) {
     	
     if ($(ui.helper).hasClass('cloned')) {
+
  $(this).append($(ui.helper).resizable({aspectRatio: true}).draggable().css({
         top: ui.position.top,
         left: ui.position.left,
@@ -112,7 +130,7 @@ else
 $(document).dblclick(function(event) {
     var x = event.pageX;
     var y = event.pageY;
-    $("<textarea draggable=true style=border:0px cols=5 ></textarea>").css({
+    $("<textarea class= ui-draggable ui-draggable-dragging ui-resizable cloned draggable=true style=border:0px cols=5 ></textarea>").draggable().css({
             position: "absolute",
             left: x,
             top: y

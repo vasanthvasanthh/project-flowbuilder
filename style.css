@@ -5,7 +5,6 @@
 	 left: 0;
 	 float : right ;
          border: 1px solid black;
-    
 	 
 }
 
@@ -16,6 +15,11 @@ textarea::-webkit-resizer {
   font-size: 15px;
        
 }
+ p::-webkit-resizer {
+  background-color: red;
+  
+}
+
 textarea{
 	font-size: 15px;
  font-weight: bold;
